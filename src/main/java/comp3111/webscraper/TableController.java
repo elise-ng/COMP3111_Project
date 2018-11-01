@@ -2,10 +2,14 @@ package comp3111.webscraper;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +25,7 @@ public class TableController {
     private ObservableList<Item> items = FXCollections.observableArrayList();
 
     @SuppressWarnings("unchecked")
-    public void initialize(TableView<Item> tableView) {
+    void initialize(TableView<Item> tableView) {
         this.tableView = tableView;
         ObservableList<TableColumn<Item, ?>> tableColumns = tableView.getColumns();
         this.tableColumnTitle = (TableColumn<Item, String>) tableColumns.get(0);
@@ -33,12 +37,40 @@ public class TableController {
         this.tableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         this.tableColumnURL.setCellValueFactory(new PropertyValueFactory<>("url"));
         this.tableColumnPostedDate.setCellValueFactory(new PropertyValueFactory<>("postedDate"));
+
+        setupCellEventOnClick();
     }
 
-    public void updateItemList(List<Item> items) {
+    void updateItemList(List<Item> items) {
         this.items.clear();
         this.items.addAll(items);
         updateTable();
+    }
+
+    private void setupCellEventOnClick() {
+        this.tableColumnURL.setCellFactory(tc -> {
+            TableCell<Item, String> cell = new TableCell<Item, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty) ;
+                    setText(empty ? null : item);
+                }
+            };
+            cell.setOnMouseClicked(event -> {
+                if(!cell.isEmpty()) {
+                    System.out.println("click");
+                    String url = cell.getItem();
+                    try {
+                        if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
+                            Runtime.getRuntime().exec(new String[] { "xdg-open", url });
+                        }
+                    } catch(IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return cell;
+        });
     }
 
     private void updateTable() {
