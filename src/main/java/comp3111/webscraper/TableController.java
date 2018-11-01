@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.Date;
 import java.util.List;
 
 public class TableController {
@@ -15,7 +16,7 @@ public class TableController {
     private TableColumn<Item, String> tableColumnTitle;
     private TableColumn<Item, Double> tableColumnPrice;
     private TableColumn<Item, String> tableColumnURL;
-    private TableColumn<Item, String> tableColumnPostedDate;
+    private TableColumn<Item, Date> tableColumnPostedDate;
 
     private ObservableList<Item> items = FXCollections.observableArrayList();
 
@@ -26,11 +27,12 @@ public class TableController {
         this.tableColumnTitle = (TableColumn<Item, String>) tableColumns.get(0);
         this.tableColumnPrice = (TableColumn<Item, Double>) tableColumns.get(1);
         this.tableColumnURL = (TableColumn<Item, String>) tableColumns.get(2);
-        this.tableColumnPostedDate = (TableColumn<Item, String>) tableColumns.get(3);
+        this.tableColumnPostedDate = (TableColumn<Item, Date>) tableColumns.get(3);
 
         this.tableColumnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         this.tableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         this.tableColumnURL.setCellValueFactory(new PropertyValueFactory<>("url"));
+        this.tableColumnPostedDate.setCellValueFactory(new PropertyValueFactory<>("postedDate"));
     }
 
     public void updateItemList(List<Item> items) {

@@ -1,11 +1,13 @@
 package comp3111.webscraper;
 
 
+import java.util.Date;
 
 public class Item {
 	private String title ; 
 	private double price ;
 	private String url ;
+	private Date postedDate;
 	
 	public String getTitle() {
 		return title;
@@ -25,6 +27,6 @@ public class Item {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-
+	public Date getPostedDate() { return postedDate; }
+	public void setPostedDate(Date postedDate) { this.postedDate = postedDate; }
 }
