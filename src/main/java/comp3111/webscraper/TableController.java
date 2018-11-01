@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
 
@@ -60,13 +61,7 @@ public class TableController {
                 if(!cell.isEmpty()) {
                     System.out.println("click");
                     String url = cell.getItem();
-                    try {
-                        if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
-                            Runtime.getRuntime().exec(new String[] { "xdg-open", url });
-                        }
-                    } catch(IOException e) {
-                        e.printStackTrace();
-                    }
+                    Utils.openURL(url);
                 }
             });
             return cell;
