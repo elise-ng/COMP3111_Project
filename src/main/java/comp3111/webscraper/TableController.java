@@ -2,31 +2,35 @@ package comp3111.webscraper;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TableController {
 
-    private TableView tableView;
+    private TableView<Item> tableView;
 
-    private TableColumn tableColumnTitle;
-    private TableColumn tableColumnPrice;
-    private TableColumn tableColumnURL;
-    private TableColumn tableColumnPostedDate;
+    private TableColumn<Item, String> tableColumnTitle;
+    private TableColumn<Item, Double> tableColumnPrice;
+    private TableColumn<Item, String> tableColumnURL;
+    private TableColumn<Item, String> tableColumnPostedDate;
 
     private ObservableList<Item> items = FXCollections.observableArrayList();
 
-    public void initialize(TableView tableView) {
+    @SuppressWarnings("unchecked")
+    public void initialize(TableView<Item> tableView) {
         this.tableView = tableView;
-        ObservableList tableColumns = tableView.getColumns();
-        this.tableColumnTitle = (TableColumn) tableColumns.get(0);
-        this.tableColumnPrice = (TableColumn) tableColumns.get(1);
-        this.tableColumnURL = (TableColumn) tableColumns.get(2);
-        this.tableColumnPostedDate = (TableColumn) tableColumns.get(3);
+        ObservableList<TableColumn<Item, ?>> tableColumns = tableView.getColumns();
+        this.tableColumnTitle = (TableColumn<Item, String>) tableColumns.get(0);
+        this.tableColumnPrice = (TableColumn<Item, Double>) tableColumns.get(1);
+        this.tableColumnURL = (TableColumn<Item, String>) tableColumns.get(2);
+        this.tableColumnPostedDate = (TableColumn<Item, String>) tableColumns.get(3);
+
+        this.tableColumnTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        this.tableColumnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        this.tableColumnURL.setCellValueFactory(new PropertyValueFactory<>("url"));
     }
 
     public void updateItemList(List<Item> items) {
@@ -36,5 +40,6 @@ public class TableController {
     }
 
     private void updateTable() {
+        this.tableView.setItems(this.items);
     }
 }
