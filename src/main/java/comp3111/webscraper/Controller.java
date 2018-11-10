@@ -5,10 +5,8 @@ package comp3111.webscraper;
 
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Hyperlink;
+import javafx.scene.control.*;
+
 import java.util.List;
 
 
@@ -22,7 +20,7 @@ import java.util.List;
  */
 public class Controller {
 
-    @FXML 
+    @FXML
     private Label labelCount; 
 
     @FXML 
@@ -39,14 +37,19 @@ public class Controller {
     
     @FXML
     private TextArea textAreaConsole;
+
+    @FXML
+    private TableView<Item> tableView;
     
     private WebScraper scraper;
+    private TableController tableController;
     
     /**
      * Default controller
      */
     public Controller() {
     	scraper = new WebScraper();
+    	tableController = new TableController();
     }
 
     /**
@@ -54,7 +57,7 @@ public class Controller {
      */
     @FXML
     private void initialize() {
-    	
+    	tableController.initialize(tableView);
     }
     
     /**
@@ -70,7 +73,7 @@ public class Controller {
     	}
     	textAreaConsole.setText(output);
 
-        labelCount.setText("Hello");
+        tableController.updateItemList(result);
     }
     
     /**
