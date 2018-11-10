@@ -44,12 +44,14 @@ public class Controller {
     private WebScraper scraper;
     private TableController tableController;
     
+    private Summary summary;
     /**
      * Default controller
      */
     public Controller() {
     	scraper = new WebScraper();
     	tableController = new TableController();
+    	summary = new Summary();
     }
 
     /**
@@ -58,6 +60,7 @@ public class Controller {
     @FXML
     private void initialize() {
     	tableController.initialize(tableView);
+    	summary.resultNotFound(labelCount, labelPrice, labelMin, labelLatest);
     }
     
     /**
@@ -74,6 +77,8 @@ public class Controller {
     	textAreaConsole.setText(output);
 
         tableController.updateItemList(result);
+        
+        summary.updateSummary(result,labelCount, labelPrice, labelMin, labelLatest);
     }
     
     /**
