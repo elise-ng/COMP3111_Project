@@ -40,15 +40,13 @@ public class Summary {
     
     private String latestUrl ;
 	
-    
-    /**
-     * This update the Summary tab if there is no item scrapped.
-     * 
-     * @param labelCount
-     * @param labelPrice
-     * @param labelMin
-     * @param labelLatest
-     */
+/**
+ * This update the Summary tab if there is no item scrapped.
+ * @param labelCount
+ * @param labelPrice
+ * @param labelMin
+ * @param labelLatest
+ */
 	void resultNotFound(Label labelCount,Label labelPrice, Hyperlink labelMin, Hyperlink labelLatest) {
 		labelCount.setText("-");
 		labelPrice.setText("-");
@@ -74,15 +72,14 @@ public class Summary {
 		
 	}
 	
-	/**
-	 * This update the Summary tab
-	 * 
-	 * @param result the searched items
-	 * @param labelCount
-	 * @param labelPrice
-	 * @param labelMin
-	 * @param labelLatest
-	 */
+/**
+ * This update the Summary tab
+ * @param result the searched items
+ * @param labelCount
+ * @param labelPrice
+ * @param labelMin
+ * @param labelLatest
+ */
 	void updateSummary(List<Item> result,Label labelCount,Label labelPrice, Hyperlink labelMin, Hyperlink labelLatest) {
 		count = 0;
 		nonZeroCount = 0;
