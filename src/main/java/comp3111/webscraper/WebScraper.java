@@ -5,10 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTime;
+import com.gargoylesoftware.htmlunit.html.*;
 
 import java.util.Vector;
 
@@ -69,9 +66,11 @@ import java.util.Vector;
  */
 public class WebScraper {
 
-	private static final String DEFAULT_URL = "https://newyork.craigslist.org/";
+	private static final String CRAIGSLIST_URL = "https://newyork.craigslist.org/";
+	private static final String DCFEVER_URL = "https://www.dcfever.com/trading/";
 	private WebClient client;
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	private SimpleDateFormat craigslist_dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private SimpleDateFormat dcfever_dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 
 	/**
 	 * Default Constructor 
@@ -90,15 +89,14 @@ public class WebScraper {
 	 */
 	public List<Item> scrape(String keyword) {
 
+		Vector<Item> result = new Vector<Item>();
+
+		// Craigslist
 		try {
-			String searchUrl = DEFAULT_URL + "search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
+			String searchUrl = CRAIGSLIST_URL + "search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			HtmlPage page = client.getPage(searchUrl);
 
-			
 			List<?> items = (List<?>) page.getByXPath("//li[@class='result-row']");
-			
-			Vector<Item> result = new Vector<Item>();
-
 			for (int i = 0; i < items.size(); i++) {
 				HtmlElement htmlItem = (HtmlElement) items.get(i);
 				HtmlAnchor itemAnchor = ((HtmlAnchor) htmlItem.getFirstByXPath(".//p[@class='result-info']/a"));
@@ -115,16 +113,46 @@ public class WebScraper {
 
 				item.setPrice(new Double(itemPrice.replace("$", "")));
 
-				item.setPostedDate(dateFormat.parse(postedDate.getAttribute("datetime")));
+				item.setPostedDate(craigslist_dateFormat.parse(postedDate.getAttribute("datetime")));
 
 				result.add(item);
 			}
-			client.close();
-			return result;
+
+            client.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return null;
+
+		// DCFEVER
+		try {
+			String searchUrl = DCFEVER_URL + "search.php?token=comp3111&type=sell&keyword=" + URLEncoder.encode(keyword, "UTF-8");
+			HtmlPage page = client.getPage(searchUrl);
+
+			List<?> items = (List<?>) page.getByXPath("//*[@id=\"main_wide_column2\"]/table/tbody/tr");
+			for (int i = 0; i < items.size(); i++) {
+				HtmlElement htmlItem = (HtmlElement) items.get(i);
+                HtmlAnchor titleAnchor = htmlItem.getFirstByXPath(".//td[3]/a");
+				HtmlTableDataCell priceTD = htmlItem.getFirstByXPath(".//td[@class=\"tlist_price\"]");
+                HtmlTableDataCell dateTD = htmlItem.getFirstByXPath(".//td[6]");
+
+				if (priceTD == null) continue; // skip ads
+
+				Item item = new Item();
+				item.setTitle(titleAnchor.getTextContent());
+				item.setUrl(DCFEVER_URL + titleAnchor.getHrefAttribute());
+				item.setPrice(new Double(priceTD.getTextContent().replace("HK$", "").replace(",", "")));
+
+				item.setPostedDate(dcfever_dateFormat.parse(dateTD.getTextContent()));
+
+				result.add(item);
+			}
+
+            client.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return result.isEmpty() ? null : result;
 	}
 
 }
