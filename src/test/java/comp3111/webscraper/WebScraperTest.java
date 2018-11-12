@@ -14,11 +14,20 @@ public class WebScraperTest {
         // check if items empty
         Assert.assertNotNull(searchResult);
 
-        // check if items from craigslist exist
-        Assert.assertFalse(searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.CRAIGSLIST)).collect(Collectors.toList()).isEmpty());
+        // check items from craigslist
+        List<Item> craigslistItems = searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.CRAIGSLIST)).collect(Collectors.toList());
+        // check if exist
+        Assert.assertFalse(craigslistItems.isEmpty());
+        // check if more than one page of items from craigslist
+        Assert.assertTrue((craigslistItems.size() / 120) > 1); // 120 items per page on craigslist
 
-        // check if items from dcfever exist
-        Assert.assertFalse(searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.DCFEVER)).collect(Collectors.toList()).isEmpty());
+
+        // check items from dcfever
+        List<Item> dcfeverItems = searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.DCFEVER)).collect(Collectors.toList());
+        // check if exist
+        Assert.assertFalse(dcfeverItems.isEmpty());
+        // check if more than one page of items from craigslist
+        Assert.assertTrue((dcfeverItems.size() / 30) > 1); // 30 items per page on dcfever
 
         // check sorting
         for (int i = 1; i < searchResult.size(); ++i) {
