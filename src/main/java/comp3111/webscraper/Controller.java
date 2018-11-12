@@ -92,9 +92,13 @@ public class Controller {
     	System.out.println("actionSearch: " + textFieldKeyword.getText());
     	List<Item> result = scraper.scrape(textFieldKeyword.getText());
     	String output = "";
-    	for (Item item : result) {
-    		output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\n";
-    	}
+    	if (result.isEmpty()) {
+    	    output += "No item found.";
+        } else {
+            for (Item item : result) {
+                output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\t" + item.getPostedDate() + "\t" + item.getSourcePortal() + "\n";
+            }
+        }
     	textAreaConsole.setText(output);
 
         tableController.updateItemList(result);

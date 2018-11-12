@@ -8,7 +8,6 @@
 - Chan Ngo Hin: Basic 1, 6
 
 ## Notes
-
 - [Task 2] Craigslist prices are multiplied by 8 to convert USD to HKD
 - [Task 2] DCFever is used as custom data source
 - [Task 3] Pagination is implemented for both Craigslist and DCFever
