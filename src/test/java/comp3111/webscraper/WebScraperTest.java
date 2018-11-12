@@ -9,21 +9,21 @@ import java.util.stream.Collectors;
 public class WebScraperTest {
     @Test
     public void testReturnCraigslistItems() {
-        List<Item> searchResult = new WebScraper().scrape("iPhone");
+        List<Item> searchResult = new WebScraper().scrape("PS4");
         Assert.assertNotNull(searchResult);
         Assert.assertFalse(searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.CRAIGSLIST)).collect(Collectors.toList()).isEmpty());
     }
 
     @Test
     public void testReturnDcfeverItems() {
-        List<Item> searchResult = new WebScraper().scrape("iPhone");
+        List<Item> searchResult = new WebScraper().scrape("PS4");
         Assert.assertNotNull(searchResult);
         Assert.assertFalse(searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.DCFEVER)).collect(Collectors.toList()).isEmpty());
     }
 
     @Test
     public void testSorting() {
-        List<Item> searchResult = new WebScraper().scrape("iPhone");
+        List<Item> searchResult = new WebScraper().scrape("PS4");
         for (int i = 1; i < searchResult.size(); ++i) {
             Item thisItem = searchResult.get(i);
             Item prevItem = searchResult.get(i - 1);
