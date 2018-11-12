@@ -13,4 +13,5 @@ public class ItemTest {
 		i.setTitle("ABCDE");
 		assertEquals(i.getTitle(), "ABCDE");
 	}
+
 }
