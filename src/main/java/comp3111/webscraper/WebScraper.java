@@ -82,7 +82,7 @@ public class WebScraper {
 	}
 
     /**
-     * Search Result Parser for Craigslist
+     * Parse HTML of Craigslist result page into list of Item objects
      *
      * @param page - HTML page of search result
      * @return List of Items found
@@ -121,7 +121,7 @@ public class WebScraper {
     }
 
     /**
-     * Search Result Parser for DCFever
+     * Parse HTML of DCFever result page into list of Item objects
      *
      * @param page - HTML page of search result
      * @return List of Items found
@@ -157,9 +157,9 @@ public class WebScraper {
     }
 
 	/**
-	 * The only method implemented in this class, to scrape web content from the craigslist and dcfever
-	 * 
-	 * @param keyword - the keyword you want to search
+	 * Scrape web content from Craigslist and DCFever. All available pages will be downloaded and parsed.
+	 *
+	 * @param keyword - the keyword for searching
 	 * @return A list of Item that was found. An empty size list is returned if nothing is found. Null if any exception occurred (e.g. no connectivity)
 	 */
 	public List<Item> scrape(String keyword) {

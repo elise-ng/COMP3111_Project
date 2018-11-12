@@ -10,7 +10,7 @@ public class Item {
 	 */
     public static class ItemComparator implements Comparator<Item> {
 		/**
-		 * Implementation of compare func of Comparator interface
+		 * Implementation of compare method of Comparator interface
 		 * @param item1 - first item to be compared
 		 * @param item2 - second item to be compared
 		 * @return integer between -1 and 1, -1 denotes first < second, 0 denotes first = second, 1 denotes first > second
