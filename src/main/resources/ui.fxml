@@ -37,18 +37,18 @@
           <items>
           	<!-- When the button New is clicked, it call actionNew because onAction-->
           	<!-- I did not associate function to most of the buttons (except the button New and Go). Go ahead and edit if you need it -->
-            <MenuItem mnemonicParsing="false" onAction="#actionNew" text="New (call Controller.actionNew())" />
+            <MenuItem fx:id="menuItemlastSearch" disable="true" mnemonicParsing="false" onAction="#actionLastSearch" text="Last Search" />
             <MenuItem mnemonicParsing="false" text="Open" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem fx:id="menuItemClose" mnemonicParsing="false" text="Close" onAction="#actionClose"/>
             <MenuItem mnemonicParsing="false" text="Save" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+            <MenuItem fx:id="menuItemQuit" mnemonicParsing="false" text="Quit" onAction="#actionQuit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About Your Team" />
+            <MenuItem mnemonicParsing="false" text="About Your Team" onAction="#actionAboutTeam"/>
           </items>
         </Menu>
       </menus>
