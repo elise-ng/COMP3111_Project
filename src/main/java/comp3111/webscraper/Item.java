@@ -3,6 +3,9 @@ package comp3111.webscraper;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * Represents an Item for sale on selling platforms
+ */
 public class Item {
 
 	/**
