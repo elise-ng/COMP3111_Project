@@ -9,14 +9,14 @@ import java.util.Date;
 public class Item {
 
 	/**
-	 * Custom Comparator for Item class
+	 * Implement comparator interface for Item class
 	 */
     public static class ItemComparator implements Comparator<Item> {
 		/**
 		 * Implementation of compare method of Comparator interface
 		 * @param item1 - first item to be compared
 		 * @param item2 - second item to be compared
-		 * @return integer between -1 and 1, -1 denotes first < second, 0 denotes first = second, 1 denotes first > second
+		 * @return integer between -1 and 1, -1 denotes first &lt; second, 0 denotes first = second, 1 denotes first &gt; second
 		 */
         public int compare(Item item1, Item item2) {
             int comparePrice = Double.compare(item1.getPrice(), item2.getPrice());
