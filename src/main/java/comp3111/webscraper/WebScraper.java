@@ -164,7 +164,8 @@ public class WebScraper {
                 System.out.println("Loading craigslist page "+ pageCount);
                 HtmlPage page = client.getPage(CRAIGSLIST_URL + searchUrl);
                 result.addAll(parseCraigslistItems(page));
-                searchUrl = ((HtmlAnchor) page.getFirstByXPath("//span[@class='buttons']/a[@title='next page']")).getHrefAttribute();
+                HtmlAnchor nextpageAnchor = page.getFirstByXPath("//span[@class='buttons']/a[@title='next page']");
+                searchUrl = nextpageAnchor == null ? "" : nextpageAnchor.getHrefAttribute();
             }
             client.close();
 		} catch (Exception e) {
@@ -181,7 +182,7 @@ public class WebScraper {
             result.addAll(parseDcfeverItems(page));
             // get last page number
 			List<HtmlElement> pageAnchors = page.getByXPath("//div[@class='pagination']/a");
-            String lastPageNumStr = pageAnchors.stream().map(elem -> elem.getTextContent()).filter(elem -> elem.contains("...")).findFirst().orElse("");
+            String lastPageNumStr = pageAnchors.stream().map(HtmlElement::getTextContent).filter(elem -> elem.contains("...")).findFirst().orElse("");
             if (!lastPageNumStr.isEmpty()) {
                 int lastPageNum = Integer.parseInt(lastPageNumStr.replace("...", ""));
                 for (int i = 2; i <= lastPageNum; ++i) {
