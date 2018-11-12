@@ -8,30 +8,27 @@ import java.util.stream.Collectors;
 
 public class WebScraperTest {
     @Test
-    public void testReturnCraigslistItems() {
+    public void testNormalReturn() {
         List<Item> searchResult = new WebScraper().scrape("PS4");
+
+        // check if items empty
         Assert.assertNotNull(searchResult);
+
+        // check if items from craigslist exist
         Assert.assertFalse(searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.CRAIGSLIST)).collect(Collectors.toList()).isEmpty());
-    }
 
-    @Test
-    public void testReturnDcfeverItems() {
-        List<Item> searchResult = new WebScraper().scrape("PS4");
-        Assert.assertNotNull(searchResult);
+        // check if items from dcfever exist
         Assert.assertFalse(searchResult.stream().filter(item -> item.getSourcePortal().equals(Item.Portal.DCFEVER)).collect(Collectors.toList()).isEmpty());
-    }
 
-    @Test
-    public void testSorting() {
-        List<Item> searchResult = new WebScraper().scrape("PS4");
+        // check sorting
         for (int i = 1; i < searchResult.size(); ++i) {
             Item thisItem = searchResult.get(i);
             Item prevItem = searchResult.get(i - 1);
 
-            // Check if sorted by price
+            // check if sorted by price
             Assert.assertFalse(thisItem.getPrice() < prevItem.getPrice());
 
-            // Check if craigslist go first if price equal
+            // check if craigslist go first if price equal
             if (thisItem.getPrice() == prevItem.getPrice() && thisItem.getSourcePortal() == Item.Portal.CRAIGSLIST) {
                 Assert.assertFalse(prevItem.getSourcePortal() == Item.Portal.DCFEVER);
             }
@@ -39,7 +36,7 @@ public class WebScraperTest {
     }
 
     @Test
-    public void testReturnEmpty() {
+    public void testEmptyReturn() {
         List<Item> searchResult = new WebScraper().scrape("COMP3111IsAnAwesomeCourse");
         Assert.assertTrue(searchResult.isEmpty());
     }
