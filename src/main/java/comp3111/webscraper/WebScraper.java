@@ -119,7 +119,7 @@ public class WebScraper {
 				item.setTitle(itemAnchor.asText());
 				item.setUrl(itemAnchor.getHrefAttribute());
 
-				item.setPrice(new Double(itemPrice.replace("$", "")));
+				item.setPrice(new Double(itemPrice.replace("$", "")) * 7.8);
 
 				item.setPostedDate(craigslist_dateFormat.parse(postedDate.getAttribute("datetime")));
 
