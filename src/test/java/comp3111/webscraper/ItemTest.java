@@ -4,7 +4,11 @@ package comp3111.webscraper;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class ItemTest {
 	@Test
@@ -43,4 +47,35 @@ public class ItemTest {
 		Assert.assertEquals(i.getSourcePortal(), Item.Portal.DCFEVER);
 	}
 
+	@Test
+	public void testComparatorSortByPrice() {
+		Item item1 = new Item();
+		item1.setPrice(1000);
+		Item item2 = new Item();
+		item2.setPrice(1001);
+
+		List<Item> actual = Arrays.asList(item2, item1);
+		actual.sort(new Item.ItemComparator());
+
+		List<Item> expected = Arrays.asList(item1, item2);
+
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testComparatorSortBySourcePortal() {
+		Item item1 = new Item();
+		item1.setPrice(1000);
+		item1.setSourcePortal(Item.Portal.CRAIGSLIST);
+		Item item2 = new Item();
+		item2.setPrice(1000);
+		item2.setSourcePortal(Item.Portal.DCFEVER);
+
+		List<Item> actual = Arrays.asList(item2, item1);
+		actual.sort(new Item.ItemComparator());
+
+		List<Item> expected = Arrays.asList(item1, item2);
+
+		assertEquals(expected, actual);
+	}
 }
