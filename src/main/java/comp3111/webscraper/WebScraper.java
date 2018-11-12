@@ -2,6 +2,7 @@ package comp3111.webscraper;
 
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -71,6 +72,13 @@ public class WebScraper {
 	private WebClient client;
 	private SimpleDateFormat craigslist_dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private SimpleDateFormat dcfever_dateFormat = new SimpleDateFormat("dd/MM HH:mm");
+
+    private class ItemComparator implements Comparator<Item> {
+        public int compare(Item item1, Item item2) {
+            int comparePrice = Double.compare(item1.getPrice(), item2.getPrice());
+            return comparePrice != 0 ? comparePrice : item1.getSourcePortal().compareTo(item2.getSourcePortal());
+        }
+    }
 
 	/**
 	 * Default Constructor 
@@ -155,6 +163,8 @@ public class WebScraper {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+
+		result.sort(new ItemComparator());
 
 		return result.isEmpty() ? null : result;
 	}
