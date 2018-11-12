@@ -81,8 +81,14 @@ public class WebScraper {
 		client.getOptions().setJavaScriptEnabled(false);
 	}
 
-	// TODO: JAVADOC
-	private List<Item> parseCraigslistItems(HtmlPage page) {
+    /**
+     * Search Result Parser for Craigslist
+     *
+     * @param page - HTML page of search result
+     * @return List of Items found
+     * @throws Exception if exception occurred
+     */
+	private List<Item> parseCraigslistItems(HtmlPage page) throws Exception {
         List<Item> result = new ArrayList<>();
         try {
             List<HtmlElement> items = page.getByXPath("//li[@class='result-row']");
@@ -109,13 +115,19 @@ public class WebScraper {
                 result.add(item);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
         return result;
     }
 
-    // TODO: JAVADOC
-    private List<Item> parseDcfeverItems(HtmlPage page) {
+    /**
+     * Search Result Parser for DCFever
+     *
+     * @param page - HTML page of search result
+     * @return List of Items found
+     * @throws Exception if exception occurred
+     */
+    private List<Item> parseDcfeverItems(HtmlPage page) throws Exception {
         List<Item> result = new ArrayList<>();
 	    try {
             List<HtmlElement> items = page.getByXPath("//*[@id=\"main_wide_column2\"]/table/tbody/tr");
@@ -139,7 +151,7 @@ public class WebScraper {
                 result.add(item);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
         return result;
     }
@@ -148,7 +160,7 @@ public class WebScraper {
 	 * The only method implemented in this class, to scrape web content from the craigslist and dcfever
 	 * 
 	 * @param keyword - the keyword you want to search
-	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
+	 * @return A list of Item that was found. An empty size list is returned if nothing is found. Null if any exception occurred (e.g. no connectivity)
 	 */
 	public List<Item> scrape(String keyword) {
 
@@ -169,6 +181,7 @@ public class WebScraper {
             client.close();
 		} catch (Exception e) {
             e.printStackTrace();
+            return null;
 		}
 
 		// DCFEVER
@@ -185,7 +198,7 @@ public class WebScraper {
             if (!lastPageNumStr.isEmpty()) {
                 int lastPageNum = Integer.parseInt(lastPageNumStr.replace("...", ""));
                 for (int i = 2; i <= lastPageNum; ++i) {
-                    System.out.println("Loading defever page " + i + " of " + lastPageNum);
+                    System.out.println("Loading dcfever page " + i + " of " + lastPageNum);
                     page = client.getPage(searchUrl + "&page=" + i);
                     result.addAll(parseDcfeverItems(page));
                 }
@@ -193,10 +206,10 @@ public class WebScraper {
             client.close();
 		} catch (Exception e) {
             e.printStackTrace();
+            return null;
 		}
 
 		result.sort(new Item.ItemComparator());
-
 		return result;
 	}
 
