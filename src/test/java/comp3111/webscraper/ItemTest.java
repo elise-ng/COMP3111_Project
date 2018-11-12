@@ -14,4 +14,11 @@ public class ItemTest {
 		assertEquals(i.getTitle(), "ABCDE");
 	}
 
+	@Test
+	public void testSetSourcePortal() {
+		Item i = new Item();
+		i.setSourcePortal(Item.Portal.DCFEVER);
+		assertEquals(i.getSourcePortal(), Item.Portal.DCFEVER);
+	}
+
 }
