@@ -82,7 +82,7 @@ public class WebScraper {
 	}
 
 	/**
-	 * The only method implemented in this class, to scrape web content from the craigslist
+	 * The only method implemented in this class, to scrape web content from the craigslist and dcfever
 	 * 
 	 * @param keyword - the keyword you want to search
 	 * @return A list of Item that has found. A zero size list is return if nothing is found. Null if any exception (e.g. no connectivity)
