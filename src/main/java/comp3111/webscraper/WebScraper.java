@@ -2,7 +2,6 @@ package comp3111.webscraper;
 
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
