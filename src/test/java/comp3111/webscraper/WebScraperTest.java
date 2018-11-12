@@ -39,8 +39,8 @@ public class WebScraperTest {
     }
 
     @Test
-    public void testReturnNull() {
+    public void testReturnEmpty() {
         List<Item> searchResult = new WebScraper().scrape("COMP3111IsAnAwesomeCourse");
-        Assert.assertNull(searchResult);
+        Assert.assertTrue(searchResult.isEmpty());
     }
 }

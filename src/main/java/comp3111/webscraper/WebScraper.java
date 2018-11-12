@@ -197,7 +197,7 @@ public class WebScraper {
 
 		result.sort(new Item.ItemComparator());
 
-		return result.isEmpty() ? null : result;
+		return result;
 	}
 
 }
