@@ -160,7 +160,6 @@ public class WebScraper {
 			String searchUrl = "/search/sss?sort=rel&query=" + URLEncoder.encode(keyword, "UTF-8");
 			while (!searchUrl.isEmpty()) {
                 pageCount += 1;
-                if (pageCount > 10) break; // FIXME: not sure whether or not to load all 3000 pages lol, asking TA...
                 System.out.println("Loading craigslist page "+ pageCount);
                 HtmlPage page = client.getPage(CRAIGSLIST_URL + searchUrl);
                 result.addAll(parseCraigslistItems(page));
