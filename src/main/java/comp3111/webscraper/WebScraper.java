@@ -115,6 +115,8 @@ public class WebScraper {
 
 				item.setPostedDate(craigslist_dateFormat.parse(postedDate.getAttribute("datetime")));
 
+				item.setSourcePortal(Item.Portal.CRAIGSLIST);
+
 				result.add(item);
 			}
 
@@ -143,6 +145,8 @@ public class WebScraper {
 				item.setPrice(new Double(priceTD.getTextContent().replace("HK$", "").replace(",", "")));
 
 				item.setPostedDate(dcfever_dateFormat.parse(dateTD.getTextContent()));
+
+				item.setSourcePortal(Item.Portal.DCFEVER);
 
 				result.add(item);
 			}
