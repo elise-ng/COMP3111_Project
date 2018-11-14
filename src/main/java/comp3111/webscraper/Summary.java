@@ -136,12 +136,13 @@ public class Summary {
 			
 		
 		if(count !=0){
-			averagePrice=averagePrice/nonZeroCount;
+			
 			
 			labelCount.setText(Integer.toString(count));
 			
 			
 			if(nonZeroCount!= 0)  {
+			averagePrice=averagePrice/nonZeroCount;
 			labelMin.setText(Double.toString(minText));
 			labelPrice.setText(Double.toString(averagePrice));
 			
