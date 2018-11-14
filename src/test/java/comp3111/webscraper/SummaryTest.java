@@ -16,6 +16,7 @@ public class SummaryTest  {
 		Date date1= new Date(1);
 		Date date2= new Date(2);
 		Date date3= new Date(3);
+		Date date4= new Date(0);
 		
 		Item item1 = new Item();
 		item1.setPrice(10);
@@ -29,16 +30,21 @@ public class SummaryTest  {
 		item3.setPrice(5);
 		item3.setPostedDate(date3);
 		
+		Item item4 = new Item();
+		item4.setPrice(15);
+		item4.setPostedDate(date4);
+		
 		List<Item> result1 = new ArrayList<>();
 		result1.add(item1);
 		result1.add(item2);
 		result1.add(item3);
+		result1.add(item4);
 		
 		Summary summaryTest= new Summary();
 		
 		summaryTest.updateSummary(result1);
 		
-		 Assert.assertEquals(3, summaryTest.getCount());
+		 Assert.assertEquals(4, summaryTest.getCount());
 		
 		 
 		 List<Item> result2 = new ArrayList<>();
