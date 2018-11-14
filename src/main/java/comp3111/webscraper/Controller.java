@@ -4,6 +4,8 @@
 package comp3111.webscraper;
 
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -53,11 +55,9 @@ public class Controller {
     @FXML
     private MenuItem menuItemlastSearch;
     
-    private String lastSearchedKeyword;
+    private SearchRecord searchRecord;
     
-    private String currentKeyword;
     
-    private int numOfSearch;
     
     
     /**
@@ -67,9 +67,7 @@ public class Controller {
     	scraper = new WebScraper();
     	tableController = new TableController();
     	summary = new Summary();
-    	
-    	
-    	
+    	searchRecord = new SearchRecord();  
     }
 
     /**
@@ -78,10 +76,9 @@ public class Controller {
     @FXML
     private void initialize() {    	
     	tableController.initialize(tableView);
-    	summary.resultNotFound(labelCount, labelPrice, labelMin, labelLatest);
+    	resultNotFound();
     	textAreaConsole.setText("");  
-    	numOfSearch=0;
-    	
+    	    	
     }
     
     /**
@@ -103,7 +100,7 @@ public class Controller {
 
         tableController.updateItemList(result);
         
-        summary.updateSummary(result,labelCount, labelPrice, labelMin, labelLatest);
+        updateSummaryTab(result);
         
         updateSearchRecord(textFieldKeyword.getText());
         
@@ -116,7 +113,7 @@ public class Controller {
     @FXML
     private void actionLastSearch() {
     	
-    	textFieldKeyword.setText(lastSearchedKeyword);
+    	textFieldKeyword.setText(searchRecord.getLastSearchedKeyword());
     	actionSearch();
     	menuItemlastSearch.setDisable(true);
     }
@@ -130,6 +127,7 @@ public class Controller {
     	menuItemlastSearch.setDisable(true);
     	textFieldKeyword.setText("");
     	tableView.getItems().clear();;
+    	searchRecord.reset();
     	initialize();
     }
     
@@ -163,18 +161,82 @@ public class Controller {
      * @param current current keyword
      */
     private void updateSearchRecord(String current) {
-    	numOfSearch++;
-    	lastSearchedKeyword = currentKeyword;
-    	currentKeyword = current;
     	
     	
     	
-    	if(numOfSearch>=2) {
+    	searchRecord.update(current);
     		
-    		menuItemlastSearch.setDisable(false);
-    	}
+    		menuItemlastSearch.setDisable(searchRecord.getDisableLastSearch());
+    	
     }
+    /**
+     * This update the Summary tab if there is no item scrapped.
+     */
+    public void resultNotFound() {
+		labelCount.setText("-");
+		labelPrice.setText("-");
+		labelMin.setText("-");
+		labelLatest.setText("-");
+		
+		labelMin.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent e) {
+		    	
+		    }
+		});
+		
+		labelLatest.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent e) {
+		    	
+		    }
+		});
+	
+	}
     
+    
+    /**
+     * This update the Summary tab
+     * @param result
+     */
+    
+    public void updateSummaryTab(List<Item> result)
+    {
+    	summary.updateSummary(result);
+    	resultNotFound();
+			
+		
+		if(summary.getCount() !=0){
+			
+			
+			labelCount.setText(Integer.toString(summary.getCount()));
+			
+			
+			if(summary.getNonZeroCount()!= 0)  {
+			
+			labelMin.setText(Double.toString(summary.getMinText()));
+			labelPrice.setText(Double.toString(summary.getAveragePrice()));
+			
+			
+			labelMin.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override
+			    public void handle(ActionEvent e) {
+			    	Utils.openURL(summary.getMinUrl());
+			    }
+			});
+			}
+			
+			labelLatest.setText(summary.getLatestText().toString()); 
+			
+			
+			labelLatest.setOnAction(new EventHandler<ActionEvent>() {
+			    @Override
+			    public void handle(ActionEvent e) {
+			    	Utils.openURL(summary.getLatestUrl());
+			    }
+			});
+		}
+    }
     
 }
 
