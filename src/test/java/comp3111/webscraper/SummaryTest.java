@@ -50,7 +50,6 @@ public class SummaryTest  {
 		 summaryTest.updateSummary(result3);
 		 Assert.assertEquals(0, summaryTest.getNonZeroCount());
 		 
-		 Utils.openURL("google.com");
 		
 	}
 }
