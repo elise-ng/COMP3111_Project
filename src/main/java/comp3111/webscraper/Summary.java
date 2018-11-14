@@ -41,47 +41,13 @@ public class Summary {
     private String latestUrl ;
 	
     
-    /**
-     *  This update the Summary tab if there is no item scrapped.
-     * @param labelCount
-     * @param labelPrice
-     * @param labelMin
-     * @param labelLatest
-     */
-    public void resultNotFound(Label labelCount,Label labelPrice, Hyperlink labelMin, Hyperlink labelLatest) {
-		labelCount.setText("-");
-		labelPrice.setText("-");
-		labelMin.setText("-");
-		labelLatest.setText("-");
-		
-		labelMin.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent e) {
-		    	
-		    }
-		});
-		
-		labelLatest.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override
-		    public void handle(ActionEvent e) {
-		    	
-		    }
-		});
-		
-		
-						
-		
-	}
+
 	
 /**
- * This update the Summary tab
+ * This update the Summary data
  * @param result the searched items
- * @param labelCount
- * @param labelPrice
- * @param labelMin
- * @param labelLatest
  */
-    public void updateSummary(List<Item> result,Label labelCount,Label labelPrice, Hyperlink labelMin, Hyperlink labelLatest) {
+    public void updateSummary(List<Item> result) {
 		count = 0;
 		nonZeroCount = 0;
 		averagePrice =0;
@@ -127,56 +93,77 @@ public class Summary {
     			
     			count++;
         }
-    		
-    	
+    		   	
 		
 		
-		
-			resultNotFound(labelCount,labelPrice, labelMin,labelLatest);
-			
 		
 		if(count !=0){
 			
-			
-			labelCount.setText(Integer.toString(count));
-			
+					
 			
 			if(nonZeroCount!= 0)  {
 			averagePrice=averagePrice/nonZeroCount;
-			labelMin.setText(Double.toString(minText));
-			labelPrice.setText(Double.toString(averagePrice));
 			
-			
-			labelMin.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override
-			    public void handle(ActionEvent e) {
-			    	Utils.openURL(minUrl);
-			    }
-			});
-			}
-			
-			labelLatest.setText(latestText.toString()); 
-			
-			
-			labelLatest.setOnAction(new EventHandler<ActionEvent>() {
-			    @Override
-			    public void handle(ActionEvent e) {
-			    	Utils.openURL(latestUrl);
-			    }
-			});
+		}
 		}
 		
 		
 	
 	}
+		
+	/** 
+	 * @return no. of item counted
+	 */
+		
+	public int getCount() {
+		return count;
+	}
 	
+	/**
+	 * 
+	 * @return no. of item with non-zero price
+	 */
+	public int getNonZeroCount() {
+		return nonZeroCount;
+	}
+	/**
+	 * 
+	 * @return average price of all items
+	 */
+	public double getAveragePrice() {
+		return averagePrice;
+	}
 	
-	
-	
-	
-	
+	/**
+	 * 
+	 * @return the min price of all items
+	 */
+	public double getMinText() {
+		return minText;
+	}
 
-	
+	/**
+	 * 
+	 * @return the date of the latest item
+	 */
+	public Date getLatestText() {
+		return latestText;
+	}
+	/**
+	 * 
+	 * @return the Url of the item with min price
+	 */
+	public String getMinUrl() {
+		return minUrl;
+	}
+    /**
+     * 
+     * @return the Url of the latest item
+     */
+	public String getLatestUrl() {
+		return latestUrl;
+	}
+ 	
 	
 	
 }
