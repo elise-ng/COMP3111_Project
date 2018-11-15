@@ -258,13 +258,5 @@ public class Controller {
 
 		updateSummaryTab(result);
 	}
-
-	public List<Item> getResultList() {
-    	return result;
-	}
-
-    public void setResultList(List<Item> list) {
-        this.result = list;
-    }
 }
 
