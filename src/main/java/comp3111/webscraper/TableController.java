@@ -14,6 +14,9 @@ import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * A controller for adapting scraped items to a table
+ */
 public class TableController {
 
     private TableView<Item> tableView;
@@ -25,6 +28,10 @@ public class TableController {
 
     private ObservableList<Item> items = FXCollections.observableArrayList();
 
+    /**
+     * Initialize the TableController with a TableView
+     * @param tableView The TableView for the controller
+     */
     @SuppressWarnings("unchecked")
     void initialize(TableView<Item> tableView) {
         this.tableView = tableView;
@@ -42,12 +49,19 @@ public class TableController {
         setupCellEventOnClick();
     }
 
+    /**
+     * Update items with a new list
+     * @param items The new List<Item>
+     */
     void updateItemList(List<Item> items) {
         this.items.clear();
         this.items.addAll(items);
         updateTable();
     }
 
+    /**
+     * Set up the OnClick events of URL cells during initialize
+     */
     private void setupCellEventOnClick() {
         this.tableColumnURL.setCellFactory(tc -> {
             TableCell<Item, String> cell = new TableCell<Item, String>() {
@@ -68,6 +82,9 @@ public class TableController {
         });
     }
 
+    /**
+     * Internal method to notify TableView to update with the current list
+     */
     private void updateTable() {
         this.tableView.setItems(this.items);
     }
