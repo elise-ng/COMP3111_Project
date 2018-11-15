@@ -111,8 +111,8 @@ public class Controller {
     	
     	menuItemlastSearch.setDisable(true);
     	textFieldKeyword.setText("");
-    	tableView.getItems().clear();;
-    	searchRecord.reset();
+    	tableView.getItems().clear();
+		searchRecord.reset();
     	initialize();
     }
     
@@ -266,6 +266,5 @@ public class Controller {
     public void setResultList(List<Item> list) {
         this.result = list;
     }
-
 }
 
