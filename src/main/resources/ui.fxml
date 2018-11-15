@@ -27,7 +27,7 @@
 
 <!-- this line specific which class is your controller - comp3111.webscraper.Controller. Thus all events shall be handled by this class -->
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comp3111.webscraper.Controller">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comp3111.webscraper.Controller">
   <children>
   
   	<!-- This is your MenuBar -->
@@ -40,15 +40,15 @@
             <MenuItem fx:id="menuItemlastSearch" disable="true" mnemonicParsing="false" onAction="#actionLastSearch" text="Last Search" />
             <MenuItem mnemonicParsing="false" text="Open" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="menuItemClose" mnemonicParsing="false" text="Close" onAction="#actionClose"/>
+            <MenuItem fx:id="menuItemClose" mnemonicParsing="false" onAction="#actionClose" text="Close" />
             <MenuItem mnemonicParsing="false" text="Save" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="menuItemQuit" mnemonicParsing="false" text="Quit" onAction="#actionQuit" />
+            <MenuItem fx:id="menuItemQuit" mnemonicParsing="false" onAction="#actionQuit" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About Your Team" onAction="#actionAboutTeam"/>
+            <MenuItem mnemonicParsing="false" onAction="#actionAboutTeam" text="About Your Team" />
           </items>
         </Menu>
       </menus>
@@ -59,9 +59,10 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TextField fx:id="textFieldKeyword" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="131.0" promptText="Keyword" />
+                        <TextField fx:id="textFieldKeyword" layoutX="14.0" layoutY="36.0" prefHeight="25.0" prefWidth="120.0" promptText="Keyword" />
                         <!--  this is the Go button. When it is clicked, it calls Controller.actionSearch() -->
-                        <Button layoutX="145.0" layoutY="36.0" mnemonicParsing="false" onAction="#actionSearch" prefHeight="25.0" prefWidth="35.0" text="Go" />
+                        <Button layoutX="140.0" layoutY="36.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#actionSearch" prefHeight="25.0" prefWidth="40.0" text="Go" textAlignment="CENTER" wrapText="true" />
+                        <Button layoutX="120.0" layoutY="68.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#refineSearch" prefHeight="25.0" prefWidth="60.0" text="Refine" textAlignment="CENTER" wrapText="true" />
 
                      </children>
                   </AnchorPane>

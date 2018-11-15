@@ -9,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.stage.Stage;
@@ -56,11 +57,10 @@ public class Controller {
     private MenuItem menuItemlastSearch;
     
     private SearchRecord searchRecord;
-    
-    
-    
-    
-    /**
+
+    private List<Item> result = new ArrayList<>();
+
+	/**
      * Default controller
      */
     public Controller() {
@@ -87,24 +87,9 @@ public class Controller {
     @FXML
     private void actionSearch() {
     	System.out.println("actionSearch: " + textFieldKeyword.getText());
-    	List<Item> result = scraper.scrape(textFieldKeyword.getText());
-    	String output = "";
-    	if (result.isEmpty()) {
-    	    output += "No item found.";
-        } else {
-            for (Item item : result) {
-                output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\t" + item.getPostedDate() + "\t" + item.getSourcePortal() + "\n";
-            }
-        }
-    	textAreaConsole.setText(output);
-
-        tableController.updateItemList(result);
-        
-        updateSummaryTab(result);
-        
+    	result = scraper.scrape(textFieldKeyword.getText());
+    	outputResult();
         updateSearchRecord(textFieldKeyword.getText());
-        
-              
     }
     
     /**
@@ -126,8 +111,8 @@ public class Controller {
     	
     	menuItemlastSearch.setDisable(true);
     	textFieldKeyword.setText("");
-    	tableView.getItems().clear();;
-    	searchRecord.reset();
+    	tableView.getItems().clear();
+		searchRecord.reset();
     	initialize();
     }
     
@@ -237,6 +222,41 @@ public class Controller {
 			});
 		}
     }
-    
+
+    @FXML
+    public void refineSearch() {
+    	if(result.size() <= 0) {
+			textAreaConsole.setText("Please perform a search first before refining");
+			return;
+		}
+		textAreaConsole.setText("");
+
+    	String keyword = textFieldKeyword.getText();
+    	List<Item> filteredList = new ArrayList<>();
+    	result.forEach(item -> {
+    		if(item.getTitle().contains(keyword)) {
+    			filteredList.add(item);
+			}
+		});
+    	result = filteredList;
+
+    	outputResult();
+	}
+
+	private void outputResult() {
+		String output = "";
+		if (result.isEmpty()) {
+			output += "No item found.";
+		} else {
+			for (Item item : result) {
+				output += item.getTitle() + "\t" + item.getPrice() + "\t" + item.getUrl() + "\t" + item.getPostedDate() + "\t" + item.getSourcePortal() + "\n";
+			}
+		}
+		textAreaConsole.setText(output);
+
+		tableController.updateItemList(result);
+
+		updateSummaryTab(result);
+	}
 }
 
