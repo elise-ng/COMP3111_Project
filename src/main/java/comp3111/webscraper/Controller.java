@@ -263,5 +263,9 @@ public class Controller {
     	return result;
 	}
 
+    public void setResultList(List<Item> list) {
+        this.result = list;
+    }
+
 }
 
