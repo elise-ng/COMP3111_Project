@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * A controller for adapting scraped items to table form
+ * A controller for adapting scraped items to a table
  */
 public class TableController {
 
