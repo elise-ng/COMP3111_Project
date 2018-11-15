@@ -5,7 +5,15 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Utility for application-wide helper methods
+ */
 public class Utils {
+
+    /**
+     * Correctly open URLs in the default browser on different desktop environments, OS dependent
+     * @param url The URL to be opened
+     */
     public static void openURL(String url) {
         String os = System.getProperty("os.name").toLowerCase();
         if(os.contains("win") || os.contains("mac")) {
