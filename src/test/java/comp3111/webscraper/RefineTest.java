@@ -19,6 +19,7 @@ public class RefineTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         new WebScraperApplication().start(stage);
+        stage.requestFocus();
     }
 
     @Test
