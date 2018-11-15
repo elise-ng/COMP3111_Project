@@ -73,7 +73,6 @@ public class TableController {
             };
             cell.setOnMouseClicked(event -> {
                 if(!cell.isEmpty()) {
-                    System.out.println("click");
                     String url = cell.getItem();
                     Utils.openURL(url);
                 }
