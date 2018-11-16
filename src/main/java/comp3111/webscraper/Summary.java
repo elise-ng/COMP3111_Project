@@ -112,6 +112,7 @@ public class Summary {
 	}
 		
 	/** 
+	 * get Count
 	 * @return no. of item counted
 	 */
 		
@@ -120,14 +121,14 @@ public class Summary {
 	}
 	
 	/**
-	 * 
+	 * get NonZeroCount
 	 * @return no. of item with non-zero price
 	 */
 	public int getNonZeroCount() {
 		return nonZeroCount;
 	}
 	/**
-	 * 
+	 * get AveragePrice
 	 * @return average price of all items
 	 */
 	public double getAveragePrice() {
@@ -135,7 +136,7 @@ public class Summary {
 	}
 	
 	/**
-	 * 
+	 * get MinText
 	 * @return the min price of all items
 	 */
 	public double getMinText() {
@@ -143,21 +144,21 @@ public class Summary {
 	}
 
 	/**
-	 * 
+	 * get LatestText
 	 * @return the date of the latest item
 	 */
 	public Date getLatestText() {
 		return latestText;
 	}
 	/**
-	 * 
+	 * get MinUrl
 	 * @return the Url of the item with min price
 	 */
 	public String getMinUrl() {
 		return minUrl;
 	}
     /**
-     * 
+     * get LatestUrl
      * @return the Url of the latest item
      */
 	public String getLatestUrl() {

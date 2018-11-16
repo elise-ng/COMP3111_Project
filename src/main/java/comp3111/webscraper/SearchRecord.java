@@ -1,5 +1,8 @@
 package comp3111.webscraper;
-
+/**
+ * This store the current and last searched keyword
+ * 
+ */
 public class SearchRecord {
 	private String lastSearchedKeyword;
     
@@ -33,6 +36,7 @@ public class SearchRecord {
     	
     }
     /** 
+     * get DisableLastSearch
      * @return true if LastSearch should be disabled, false if not
      */
      
@@ -41,6 +45,7 @@ public class SearchRecord {
     }
     
     /** 
+     * get LastSearchedKeyword
      * @return the Last Searched keyword
      */
     public String getLastSearchedKeyword() {

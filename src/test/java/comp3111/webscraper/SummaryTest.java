@@ -45,7 +45,9 @@ public class SummaryTest  {
 		summaryTest.updateSummary(result1);
 		
 		 Assert.assertEquals(4, summaryTest.getCount());
-		
+		 Assert.assertTrue((10+5+15)/3== summaryTest.getAveragePrice());
+		 Assert.assertTrue( summaryTest.getMinText()==5);
+		 Assert.assertTrue(summaryTest.getLatestText().getTime()==date3.getTime());
 		 
 		 List<Item> result2 = new ArrayList<>();
 		 summaryTest.updateSummary(result2);
