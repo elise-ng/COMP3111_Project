@@ -18,12 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.text.Text;
 
 /**
- * 
- * @author kevinw
- *
- *
- * Controller class that manage GUI interaction. Please see document about JavaFX for details.
- * 
+ * FXML Controller for application's main UI
  */
 public class Controller {
 
@@ -182,7 +177,7 @@ public class Controller {
     
     /**
      * This update the Summary tab
-     * @param result
+     * @param result the new list of items
      */
     
     public void updateSummaryTab(List<Item> result)
