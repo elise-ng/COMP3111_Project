@@ -182,7 +182,7 @@ public class Controller {
     
     /**
      * This update the Summary tab
-     * @param result the new list of item
+     * @param result the new list of items
      */
     
     public void updateSummaryTab(List<Item> result)

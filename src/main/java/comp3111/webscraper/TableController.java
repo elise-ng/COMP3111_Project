@@ -47,7 +47,7 @@ public class TableController {
 
     /**
      * Update items with a new list
-     * @param items The new List<Item>
+     * @param items The new list of items
      */
     void updateItemList(List<Item> items) {
         this.items.clear();
