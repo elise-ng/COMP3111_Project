@@ -2,6 +2,8 @@
 
 [Link to project requirements and skeleton code](https://github.com/khwang0/2018F-COMP3111)
 
+[Link to javadoc](https://chihimng.com/COMP3111_Project)
+
 ## Group Members and Task Allocation
 - Ng Chi Him: Basic 2, 3
 - Wong Hiu Nam: Basic 4, 5
