@@ -5,9 +5,11 @@
 [Link to javadoc](https://chihimng.com/COMP3111_Project)
 
 ## Group Members and Task Allocation
-- Ng Chi Him: Basic 2, 3
-- Wong Hiu Nam: Basic 4, 5
-- Chan Ngo Hin: Basic 1, 6
+|Name|ITSC|Task|Task|
+|----|----|----|----|
+|Ng Chi Him|chngax|Basic 2|Basic 3|
+|Wong Hiu Nam|hnwongab|Basic 4|Basic 5|
+|Chan Ngo Him|nhchanac|Basic 1|Basic 6|
 
 ## Notes
 - [Task 2] Craigslist prices are multiplied by 8 to convert USD to HKD
