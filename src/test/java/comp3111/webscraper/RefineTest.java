@@ -1,7 +1,6 @@
 package comp3111.webscraper;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.junit.Assert;
@@ -19,7 +18,7 @@ public class RefineTest extends ApplicationTest {
     @Override
     public void start(Stage stage) throws Exception {
         new WebScraperApplication().start(stage);
-        stage.requestFocus();
+        stage.setAlwaysOnTop(true);
     }
 
     @Test

@@ -1,28 +1,21 @@
 package comp3111.webscraper;
 
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import org.junit.Assert;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import static org.testfx.assertions.api.Assertions.assertThat;
 
 public class TableViewTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws Exception {
         new WebScraperApplication().start(stage);
-        stage.requestFocus();
+        stage.setAlwaysOnTop(true);
     }
 
     @Test
